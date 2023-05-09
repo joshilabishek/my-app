@@ -10,9 +10,9 @@ jobs:
           name: Print artifact version
           command: |
             # Construct the artifact filename using $CIRCLE_BUILD_NUM
-            ARTIFACT_FILE=myapp-$CIRCLE_BUILD_NUM.jar
+            ARTIFACT_FILE=ESIndexingService-$CIRCLE_BUILD_NUM.jar
             # Extract the version number from the filename
-            ARTIFACT_VERSION=$(echo "$ARTIFACT_FILE" | sed 's/myapp-\(.*\)\.jar/\1/')
+            ARTIFACT_VERSION=$(echo "$ARTIFACT_FILE" | sed 's/ESIndexingService-\(.*\)\.jar/\1/')
             # Print the artifact version
             echo "Artifact version: $ARTIFACT_VERSION"
 
