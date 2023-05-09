@@ -14,5 +14,4 @@ jobs:
             # Extract the version number from the filename
             ARTIFACT_VERSION=$(echo "$ARTIFACT_FILE" | sed 's/ESIndexingService-\(.*\)\.jar/\1/')
             # Print the artifact version
-            echo "Artifact version: $ARTIFACT_VERSION"
-
+            echo "Artifact version: ESIndexingService-$ARTIFACT_VERSION.jar"
