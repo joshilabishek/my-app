@@ -16,4 +16,4 @@ jobs:
             # Print the artifact version
             echo "Artifact version: ESIndexingService-$ARTIFACT_VERSION.jar"
             ARTIFACT_NAME=ESIndexingService-$ARTIFACT_VERSION.jar
-            echo "ARTIFACT_NAME"
+            echo "$ARTIFACT_NAME"
