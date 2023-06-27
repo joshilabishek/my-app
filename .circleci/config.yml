@@ -32,7 +32,7 @@ jobs:
                 echo "No repositories found."
                 return
               fi
-              for i in $(seq 0 $((repos_count - 1))); do
+              for ((i=0; i<repos_count; i++)); do
                 local repo_name=$(echo "${repos}" | jq -r ".[$i].name")
                 echo "Cloning repository: ${repo_name}"
                 if [[ -n "${repo_name}" ]]; then
