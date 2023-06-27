@@ -13,6 +13,7 @@ jobs:
           command: |
             #!/bin/bash
             echo "Running bash script"
+            chmod +x /script/reposclone.sh
             ./script/reposclone.sh
 
       # Add additional steps as needed
