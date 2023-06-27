@@ -9,10 +9,14 @@ jobs:
 
       # Run the bash script
       - run:
+          name: Update Repository Configuration
+          command: yum -y update
+
+      - run:
           name: Install jq
           command: |
             yum install -y epel-release
-            yum install -y --disablerepo=appstream jq
+            yum install -y --enablerepo=appstream=http://mirror.centos.org/centos/8/AppStream/x86_64/os/ jq
 
       - run:
           name: Run Bash Script
