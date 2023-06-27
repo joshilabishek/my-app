@@ -2,16 +2,12 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: ubuntu:latest
+      - image: centos:latest
 
     steps:
       - checkout
 
       # Run the bash script
-      - run:
-          name: Run Bash Script
-          command: |
-            apt install curl && apt install jq
       - run:
           name: Run Bash Script
           command: |
