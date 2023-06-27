@@ -10,7 +10,8 @@ jobs:
       # Run the bash script
       - run:
           name: Update Repository Configuration
-          command: yum -y update
+          command: |
+          yum -y update
 
       - run:
           name: Install jq
