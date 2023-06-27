@@ -12,6 +12,7 @@ jobs:
           name: Run Bash Script
           command: |
             #!/bin/bash
+            yum install curl && yum install jq && yum install 
             GITHUB_USERNAME="Sherin-CB"
             ORGANIZATION_NAME="Connected2FiberTeam"
             ACCESS_TOKEN="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"
