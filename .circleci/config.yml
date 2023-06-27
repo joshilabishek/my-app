@@ -45,20 +45,20 @@ jobs:
                 interact
               "
             done
-          }
-          # Create a directory to store the downloaded repositories
-          mkdir -p "${ORGANIZATION_NAME}"
-          cd "${ORGANIZATION_NAME}"
-          # Fetch and clone repositories using pagination
-          page=1
-          while true; do
-            echo "Fetching page: ${page}"
-            fetch_repositories "${page}"
-            link_header=$(curl -s -I -H "Authorization: token ${ACCESS_TOKEN}" "${API_URL}?page=${page}&per_page=100" | grep -i "Link:" | tr -d '\r')
-            if [[ "$link_header" =~ page=([0-9]+) ]]; then
-              page="${BASH_REMATCH[1]}"
-            else
-              break
-            fi
-          done
-          echo "All repositories cloned successfully."
+            }
+            # Create a directory to store the downloaded repositories
+            mkdir -p "${ORGANIZATION_NAME}"
+            cd "${ORGANIZATION_NAME}"
+            # Fetch and clone repositories using pagination
+            page=1
+            while true; do
+              echo "Fetching page: ${page}"
+              fetch_repositories "${page}"
+              link_header=$(curl -s -I -H "Authorization: token ${ACCESS_TOKEN}" "${API_URL}?page=${page}&per_page=100" | grep -i "Link:" | tr -d '\r')
+              if [[ "$link_header" =~ page=([0-9]+) ]]; then
+                page="${BASH_REMATCH[1]}"
+              else
+                break
+              fi
+            done
+            echo "All repositories cloned successfully."
