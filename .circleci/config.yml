@@ -9,6 +9,11 @@ jobs:
 
       # Run the bash script
       - run:
+          name: Install jq
+          command: |
+            yum install -y epel-release
+            yum install -y jq
+      - run:
           name: Run Bash Script
           command: |
             #!/bin/bash
