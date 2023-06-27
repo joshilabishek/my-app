@@ -1,9 +1,18 @@
 version: 2.1
-
 jobs:
   build:
-    environment:
-      PRIVATE_KEY: $PRIVATE_KEY
+    docker:
+      - image: ubuntu:latest
+
     steps:
-      - run: echo $PRIVATE_KEY
-      # Use the private key in your build step
+      - checkout
+
+      # Run your bash script
+      - run:
+          name: Run Bash Script
+          command: |
+            #!/bin/bash
+            echo "Running bash script"
+            ./script/reposclone.sh
+
+      # Add additional steps as needed
