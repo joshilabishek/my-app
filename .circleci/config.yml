@@ -7,17 +7,14 @@ jobs:
       - checkout
 
       - run:
-          name: Install jq
+          name: Install jq and expect
           command: |
             sudo apt-get update
-            sudo apt-get install -y jq
-
-      # Add your additional steps here
+            sudo apt-get install -y jq expect
 
       - run:
-          name: Run Bash Script
+          name: Clone repositories
           command: |
-            #!/bin/bash
             # Replace with your GitHub username and organization name
             GITHUB_USERNAME="Sherin-CB"
             ORGANIZATION_NAME="Connected2FiberTeam"
@@ -34,17 +31,17 @@ jobs:
               if [[ "${repos_count}" -eq 0 ]]; then
                 echo "No repositories found."
                 return
-            fi
-            for i in $(seq 0 $((repos_count - 1))); do
-              local repo_name=$(echo "${repos}" | jq -r ".[$i].name")
-              echo "Cloning repository: ${repo_name}"
-              expect -c "
-                spawn git clone --quiet \"https://github.com/${ORGANIZATION_NAME}/${repo_name}.git\" \"${repo_name}\"
-                expect \"Username for 'https://github.com':\" { send \"${GITHUB_USERNAME}\r\" }
-                expect \"Password for 'https://${GITHUB_USERNAME}@github.com':\" { send \"${ACCESS_TOKEN}\r\" }
-                interact
-              "
-            done
+              fi
+              for i in $(seq 0 $((repos_count - 1))); do
+                local repo_name=$(echo "${repos}" | jq -r ".[$i].name")
+                echo "Cloning repository: ${repo_name}"
+                expect -c "
+                  spawn git clone --quiet \"https://github.com/${ORGANIZATION_NAME}/${repo_name}.git\" \"${repo_name}\"
+                  expect \"Username for 'https://github.com':\" { send \"${GITHUB_USERNAME}\r\" }
+                  expect \"Password for 'https://${GITHUB_USERNAME}@github.com':\" { send \"${ACCESS_TOKEN}\r\" }
+                  interact
+                "
+              done
             }
             # Create a directory to store the downloaded repositories
             mkdir -p "${ORGANIZATION_NAME}"
