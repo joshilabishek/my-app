@@ -35,12 +35,14 @@ jobs:
               for i in $(seq 0 $((repos_count - 1))); do
                 local repo_name=$(echo "${repos}" | jq -r ".[$i].name")
                 echo "Cloning repository: ${repo_name}"
-                expect -c "
-                  spawn git clone --quiet \"https://github.com/${ORGANIZATION_NAME}/${repo_name}.git\" \"${repo_name}\"
-                  expect \"Username for 'https://github.com':\" { send \"${GITHUB_USERNAME}\r\" }
-                  expect \"Password for 'https://${GITHUB_USERNAME}@github.com':\" { send \"${ACCESS_TOKEN}\r\" }
-                  interact
-                "
+                if [[ -n "${repo_name}" ]]; then
+                  expect -c "
+                    spawn git clone --quiet \"https://github.com/${ORGANIZATION_NAME}/${repo_name}.git\" \"${repo_name}\"
+                    expect \"Username for 'https://github.com':\" { send \"${GITHUB_USERNAME}\r\" }
+                    expect \"Password for 'https://${GITHUB_USERNAME}@github.com':\" { send \"${ACCESS_TOKEN}\r\" }
+                    interact
+                  "
+                fi
               done
             }
             # Create a directory to store the downloaded repositories
