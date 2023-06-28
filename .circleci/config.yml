@@ -33,7 +33,7 @@ jobs:
                 return
               fi
               for ((i=0; i<repos_count; i++)); do
-                local repo_name=$(echo "${repos}" | jq -r ".[$i].name")
+                local repo_name=$(echo "${repos}" | jq -r ".[$i] | .name")
                 echo "Cloning repository: ${repo_name}"
                 if [[ -n "${repo_name}" ]]; then
                   expect -c "
